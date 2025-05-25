@@ -16,16 +16,17 @@ public class Main {
         try {
             boolean running = true;
             while (running) {
-                System.out.println("\nUser Management System");
-                System.out.println("1. Create User");
-                System.out.println("2. View All Users");
-                System.out.println("3. View User by ID");
-                System.out.println("4. Update User");
-                System.out.println("5. Delete User");
-                System.out.println("6. Exit");
-                System.out.print("Enter your choice: ");
+                System.out.println("\nВыберите опцию:");
+                System.out.println("1. Создать пользователя");
+                System.out.println("2. Показать всех пользователей");
+                System.out.println("3. Найти пользователя по ID");
+                System.out.println("4. Обновить пользователя");
+                System.out.println("5. Удалить пользователя");
+                System.out.println("6. Выход");
+                System.out.print("Введите свой выбор: ");
 
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = scanner.nextInt();
+                scanner.nextLine();;
 
                 switch (choice) {
                     case 1 -> createUser();
@@ -34,11 +35,11 @@ public class Main {
                     case 4 -> updateUser();
                     case 5 -> deleteUser();
                     case 6 -> running = false;
-                    default -> System.out.println("Invalid choice. Please try again.");
+                    default -> System.out.println("Неверный выбор. Попробуйте снова.");
                 }
             }
         } catch (Exception e) {
-            System.err.println("An error occurred: " + e.getMessage());
+            System.err.println("Произошла критическая ошибка: " + e.getMessage());
             e.printStackTrace();
         } finally {
             HibernateUtil.shutdown();
@@ -47,88 +48,88 @@ public class Main {
     }
 
     private static void createUser() {
-        System.out.print("Enter name: ");
+        System.out.print("Введите имя: ");
         String name = scanner.nextLine();
 
-        System.out.print("Enter email: ");
+        System.out.print("Введите email: ");
         String email = scanner.nextLine();
 
-        System.out.print("Enter age: ");
+        System.out.print("Введите age: ");
         int age = Integer.parseInt(scanner.nextLine());
 
         User user = new User(name, email, age);
         userDao.save(user);
-        System.out.println("User created successfully: " + user);
+        System.out.println("Пользователь успешно создан: " + user);
     }
 
     private static void viewAllUsers() {
         List<User> users = userDao.findAll();
         if (users.isEmpty()) {
-            System.out.println("No users found.");
+            System.out.println("Пользователь не найден");
         } else {
-            System.out.println("List of Users:");
+            System.out.println("Список пользователей:");
             users.forEach(System.out::println);
         }
     }
 
     private static void viewUserById() {
-        System.out.print("Enter user ID: ");
+        System.out.print("Введите id пользователя: ");
         Long id = Long.parseLong(scanner.nextLine());
 
         var user = userDao.findById(id);
         if (user.isPresent()) {
-            System.out.println("User found: " + user.get());
+            System.out.println("Пользователь найден: " + user.get());
         } else {
-            System.out.println("User not found with ID: " + id);
+            System.out.println("Пользовать с: " + id + " не найден");
         }
     }
 
     private static void updateUser() {
-        System.out.print("Enter user ID to update: ");
+        System.out.print("введите id пользователя : ");
         Long id = Long.parseLong(scanner.nextLine());
 
         var userOptional = userDao.findById(id);
         if (userOptional.isEmpty()) {
-            System.out.println("User not found with ID: " + id);
+            System.out.println("Пользователь с id не найден: " + id);
             return;
         }
 
         User user = userOptional.get();
 
-        System.out.print("Enter new name (current: " + user.getName() + "): ");
+        System.out.print("Введите новое имя (текущее: " + user.getName() + "): ");
         String name = scanner.nextLine();
         if (!name.isEmpty()) {
             user.setName(name);
         }
 
-        System.out.print("Enter new email (current: " + user.getEmail() + "): ");
+        System.out.print("Введите новый email (текущий: " + user.getEmail() + "): ");
         String email = scanner.nextLine();
         if (!email.isEmpty()) {
             user.setEmail(email);
         }
 
-        System.out.print("Enter new age (current: " + user.getAge() + "): ");
+        System.out.print("Введите новый возраст (текущий: " + user.getAge() + "): ");
         String ageInput = scanner.nextLine();
         if (!ageInput.isEmpty()) {
             user.setAge(Integer.parseInt(ageInput));
         }
 
         userDao.update(user);
-        System.out.println("User updated successfully: " + user);
+        System.out.println("Пользователь успешно обновился: " + user);
     }
 
     private static void deleteUser() {
-        System.out.print("Enter user ID to delete: ");
+        System.out.print("Введите id пользователя для удаления: ");
         Long id = Long.parseLong(scanner.nextLine());
 
         var userOptional = userDao.findById(id);
         if (userOptional.isEmpty()) {
-            System.out.println("User not found with ID: " + id);
+            System.out.println("Пользователь с id не найден: " + id);
             return;
         }
 
         User user = userOptional.get();
         userDao.delete(user);
-        System.out.println("User deleted successfully: " + user);
+        System.out.println("Пользователь успешно удален: " + user);
     }
 }

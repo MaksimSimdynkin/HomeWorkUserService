@@ -23,7 +23,6 @@ public class User {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    // Constructors
     public User() {
     }
 
@@ -34,7 +33,6 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -77,12 +75,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", createdAt=" + createdAt +
-                '}';
+        return "User - " +
+                " id = " + id + " || " +
+                " name = " + name + " || " +
+                " email = " + email + " || " +
+                " age = " + age + " || " +
+                " createdAt = " + createdAt;
     }
 }

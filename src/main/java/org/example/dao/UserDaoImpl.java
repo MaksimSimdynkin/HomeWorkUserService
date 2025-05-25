@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Error saving user", e);
+            throw new RuntimeException("Ошибка сохранения пользователя", e);
         }
     }
 
@@ -67,7 +67,7 @@ public class UserDaoImpl implements UserDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Error updating user", e);
+            throw new RuntimeException("Ошибка при обновлении пользователя", e);
         }
     }
 
@@ -82,7 +82,7 @@ public class UserDaoImpl implements UserDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Error deleting user", e);
+            throw new RuntimeException("Ошибка при удалении пользователя\n", e);
         }
     }
 }
