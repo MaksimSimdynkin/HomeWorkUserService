@@ -14,6 +14,6 @@
         <property name="format_sql">true</property>
         <property name="hbm2ddl.auto">create-drop</property>
 
-        <mapping class="com.example.model.User"/>
+        <mapping class="com.example.entity.User"/>
     </session-factory>
 </hibernate-configuration>
