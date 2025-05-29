@@ -31,24 +31,6 @@ public class HibernateUtil {
             throw new ExceptionInInitializerError(e);
         }
     }
-
-    private static SessionFactory buildSessionFactory() {
-        try {
-            StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
-                    .configure("hibernate.cfg.xml")
-                    .build();
-
-            Metadata metadata = new MetadataSources(standardRegistry)
-                    .getMetadataBuilder()
-                    .build();
-
-            return metadata.getSessionFactoryBuilder().build();
-        } catch (Exception e) {
-            System.err.println("Ошибка при создании SessionFactory." + e);
-            throw new ExceptionInInitializerError(e);
-        }
-    }
-
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

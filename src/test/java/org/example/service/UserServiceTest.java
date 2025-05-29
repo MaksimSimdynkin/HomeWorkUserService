@@ -1,6 +1,5 @@
 package org.example.service;
 
-import org.example.dao.UserDao;
 import org.example.dao.UserDaoImpl;
 import org.example.entity.User;
 import org.junit.jupiter.api.BeforeEach;

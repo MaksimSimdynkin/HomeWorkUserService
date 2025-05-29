@@ -8,6 +8,10 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +40,16 @@ class UserDaoImplTest {
 
         userDao = new UserDaoImpl();
         testUser = new User("Test User", "test@example.com", 30);
+
+        try (Connection conn = DriverManager.getConnection(
+                postgres.getJdbcUrl(),
+                postgres.getUsername(),
+                postgres.getPassword());
+             Statement stmt = conn.createStatement()) {
+            stmt.execute("CREATE SCHEMA IF NOT EXISTS users");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @AfterAll
