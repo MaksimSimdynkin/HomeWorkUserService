@@ -22,7 +22,7 @@ class UserDaoImplTest {
             .withUsername("testuser")
             .withPassword("testpass");
 
-    private static UserDao userDao;
+    private static UserDaoImpl userDao;
     private static User testUser;
 
     @BeforeAll
@@ -72,7 +72,7 @@ class UserDaoImplTest {
         List<User> users = userDao.findAll();
 
         assertFalse(users.isEmpty());
-        assertTrue(users.size() <= 1);
+        assertTrue(users.size() == 1);
     }
 
     @Test
