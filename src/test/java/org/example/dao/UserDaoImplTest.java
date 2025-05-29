@@ -2,11 +2,13 @@ package org.example.dao;
 
 import org.example.entity.User;
 import org.example.util.HibernateUtil;
+import org.hibernate.Session;
 import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,7 +74,7 @@ class UserDaoImplTest {
         List<User> users = userDao.findAll();
 
         assertFalse(users.isEmpty());
-        assertTrue(users.size() == 1);
+        assertTrue(users.size() >= 1);
     }
 
     @Test

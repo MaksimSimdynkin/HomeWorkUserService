@@ -6,7 +6,8 @@
     <session-factory>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">${hibernate.connection.url}</property>
-<!--        <property name="hibernate.default_schema">kaka</property>-->
+        <property name="hibernate.hbm2ddl.auto"/>
+        <property name="hibernate.default_schema">kaka</property>
         <property name="connection.username">${hibernate.connection.username}</property>
         <property name="connection.password">${hibernate.connection.password}</property>
 
