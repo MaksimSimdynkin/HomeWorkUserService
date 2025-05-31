@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.dao.UserDao;
 import org.example.dao.UserDaoImpl;
 import org.example.entity.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.*;
 class UserServiceTest {
 
     @Mock
-    private UserDaoImpl userDao;
+    private UserDao userDao;
 
     @InjectMocks
     private UserService userService;
